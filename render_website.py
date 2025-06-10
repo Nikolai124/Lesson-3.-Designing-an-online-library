@@ -1,4 +1,5 @@
 from jinja2 import Environment, FileSystemLoader, select_autoescape
+from more_itertools import chunked
 from livereload import Server
 import json
 
@@ -7,6 +8,7 @@ def on_reload():
     with open("books/meta_data.json", "r", encoding='utf-8') as books:
         books = books.read()
     books = json.loads(books)
+    books = list(chunked(books, 2))
     env = Environment(
         loader=FileSystemLoader('.'),
         autoescape=select_autoescape(['html', 'xml'])
