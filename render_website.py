@@ -1,4 +1,5 @@
 from jinja2 import Environment, FileSystemLoader, select_autoescape
+from math import ceil
 from more_itertools import chunked
 from livereload import Server
 import json
@@ -16,10 +17,12 @@ def on_reload():
         books = books.read()
     books = json.loads(books)
     website_pages = list(chunked(books, 10))
+    pages_count = len(website_pages)
     for number, website_page in enumerate(website_pages):
         books = list(chunked(website_page, 2))
         rendered_page = template.render(
-            books=books
+            books=books,
+            pages_count=pages_count
         )
         with open(f'pages/index{number}.html', 'w', encoding="utf8") as file:
             file.write(rendered_page)
