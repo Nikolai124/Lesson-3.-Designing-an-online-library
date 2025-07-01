@@ -17,12 +17,14 @@ def on_reload():
         books = books.read()
     books = json.loads(books)
     website_pages = list(chunked(books, 10))
-    pages_count = len(website_pages)
-    for number, website_page in enumerate(website_pages):
+    pages_count = len(website_pages) + 1
+    print(pages_count)
+    for number, website_page in enumerate(website_pages, 1):
         books = list(chunked(website_page, 2))
         rendered_page = template.render(
             books=books,
-            pages_count=pages_count
+            pages_count=pages_count,
+            current_page_number=number 
         )
         with open(f'pages/index{number}.html', 'w', encoding="utf8") as file:
             file.write(rendered_page)
