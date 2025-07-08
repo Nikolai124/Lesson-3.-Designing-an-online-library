@@ -22,12 +22,12 @@ def on_reload():
         books = list(chunked(website_page, 2))
         rendered_page = template.render(
             books=books,
-            pages_count=pages_count, #кол-во страниц
-            current_page_number=number #номер текущей страницы
+            pages_count=pages_count,
+            current_page_number=number
         )
         with open(f'pages/index{number}.html', 'w', encoding="utf8") as file:
             file.write(rendered_page)
 on_reload()
 server = Server()
 server.watch('template.html', on_reload)
-server.serve(root='.')
+server.serve(root='.', default_filename='pages/index1.html')
