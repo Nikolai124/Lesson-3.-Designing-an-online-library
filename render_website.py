@@ -1,19 +1,21 @@
 from jinja2 import Environment, FileSystemLoader, select_autoescape
-from math import ceil
 from more_itertools import chunked
 from livereload import Server
 import json
 import os
+from dotenv import load_dotenv
 
 
 def on_reload():
+    load_dotenv()
     env = Environment(
         loader=FileSystemLoader('.'),
         autoescape=select_autoescape(['html', 'xml'])
     )
     template = env.get_template('template.html')
     os.makedirs('pages', exist_ok=True)
-    with open("books/meta_data.json", "r", encoding='utf-8') as books:
+    meta_data = os.environ['META_DATA']
+    with open(meta_data, "r", encoding='utf-8') as books:
         books = books.read()
     books = json.loads(books)
     website_pages = list(chunked(books, 10))
