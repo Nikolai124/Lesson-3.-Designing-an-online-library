@@ -28,7 +28,7 @@ python render_website.py
 
 После этого вы можете перейти на [локальную](http://127.0.0.1:5500) версию сайта.
 
-Также есть GitHub-версия сайта, которая запускается по этой [ссылке](https://nikolai124.github.io/Lesson-3.-Designing-an-online-library/).
+Также есть GitHub-версия сайта, которая запускается по этой [ссылке](https://nikolai124.github.io/Lesson-3.-Designing-an-online-library/pages/index1.html).
 
 ### Оффлайн версия сайта
 Чтобы запустить оффлайн версию сайта, вам нужно открыть папку с программой, перейти в папку "pages" и открыть файл "index1.html".
