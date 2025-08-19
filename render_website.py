@@ -19,7 +19,8 @@ def on_reload():
     information_about_books = os.getenv('META_DATA', default='meta_data.json')
     with open(information_about_books, 'r', encoding='utf-8') as file:
         books = json.load(file)
-    website_pages = list(chunked(books, 10))
+    books_on_page = 10
+    website_pages = list(chunked(books, books_on_page))
     pages_count = len(website_pages) + 1
     for number, website_page in enumerate(website_pages, 1):
         rendered_page = template.render(
