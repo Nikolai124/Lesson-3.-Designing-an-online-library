@@ -16,7 +16,7 @@ def on_reload():
     )
     template = env.get_template('template.html')
     os.makedirs('pages', exist_ok=True)
-    meta_data = os.environ['META_DATA']
+    meta_data = os.getenv('META_DATA', default="meta_data.json")
     with open(meta_data, "r", encoding='utf-8') as books:
         books = books.read()
     books = json.loads(books)
