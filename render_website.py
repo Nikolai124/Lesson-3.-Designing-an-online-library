@@ -17,15 +17,13 @@ def on_reload():
     template = env.get_template('template.html')
     os.makedirs('pages', exist_ok=True)
     meta_data = os.getenv('META_DATA', default="meta_data.json")
-    with open(meta_data, "r", encoding='utf-8') as books:
-        books = books.read()
-    books = json.loads(books)
+    with open(meta_data, "r", encoding='utf-8') as file:
+        books = json.load(file)
     website_pages = list(chunked(books, 10))
     pages_count = len(website_pages) + 1
     for number, website_page in enumerate(website_pages, 1):
-        books = list(chunked(website_page, 2))
         rendered_page = template.render(
-            books=books,
+            books=website_page,
             pages_count=pages_count,
             current_page_number=number
         )
@@ -34,4 +32,4 @@ def on_reload():
 on_reload()
 server = Server()
 server.watch('template.html', on_reload)
-server.serve(root='.', default_filename='pages/index1.html')
+server.serve(root='.', default_filename='../pages/index1.html')
