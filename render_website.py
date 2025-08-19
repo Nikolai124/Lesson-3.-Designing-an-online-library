@@ -1,9 +1,11 @@
-from jinja2 import Environment, FileSystemLoader, select_autoescape
-from more_itertools import chunked
-from livereload import Server
 import json
 import os
+
+
 from dotenv import load_dotenv
+from more_itertools import chunked
+from livereload import Server
+from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 
 def on_reload():
