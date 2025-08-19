@@ -16,8 +16,8 @@ def on_reload():
     )
     template = env.get_template('template.html')
     os.makedirs('pages', exist_ok=True)
-    information_about_books = os.getenv('META_DATA', default="meta_data.json")
-    with open(information_about_books, "r", encoding='utf-8') as file:
+    information_about_books = os.getenv('META_DATA', default='meta_data.json')
+    with open(information_about_books, 'r', encoding='utf-8') as file:
         books = json.load(file)
     website_pages = list(chunked(books, 10))
     pages_count = len(website_pages) + 1
@@ -27,7 +27,7 @@ def on_reload():
             pages_count=pages_count,
             current_page_number=number
         )
-        with open(f'pages/index{number}.html', 'w', encoding="utf8") as file:
+        with open(f'pages/index{number}.html', 'w', encoding='utf8') as file:
             file.write(rendered_page)
 on_reload()
 server = Server()
